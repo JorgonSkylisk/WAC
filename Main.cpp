@@ -1,9 +1,14 @@
+// ****************
+// *** Includes ***
+// ****************
 // **** LIBRARIES ****
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <string>
 #include <cstdlib>
 #include <ctime>
+// Project Include
+#include "Critter.h"
 
 int main()
 {
@@ -15,10 +20,18 @@ int main()
 	gamewindow.create(sf::VideoMode::getDesktopMode(), "Button Masher",
 	sf::Style::Titlebar | sf::Style::Close);
 	
+
+
+
+
 	// TIMER
 	sf::Time timeLimit = sf::seconds(10.0f);
 	sf::Time timeRemaining = timeLimit;
 	sf::Clock gameClock;
+
+	//create instance of Critter Class
+
+	Critter Gorilla;
 
 	// *****************
 	// *** END SETUP ***
@@ -57,7 +70,7 @@ int main()
 	// *****************
 
 		gamewindow.clear();
-
+		Gorilla.Draw(gamewindow);
 		gamewindow.display();
 
 	// *** END DRAW ***
