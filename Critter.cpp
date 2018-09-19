@@ -16,12 +16,8 @@ Critter::Critter()
 	, m_deathSound()
 	, m_deathBuffer()
 	, m_pendingScore(0)
+	, m_scoreValue(1)
 {
-	// Setup Sprite
-	m_texture.loadFromFile("graphics/gorilla.png");
-	m_sprite.setTexture(m_texture);
-	m_sprite.setPosition(rand() % sf::VideoMode::getDesktopMode().width
-		, rand() % sf::VideoMode::getDesktopMode().height);
 	//Setting death sound
 	m_deathBuffer.loadFromFile("audio/buttonclick.ogg");
 	m_deathSound.setBuffer(m_deathBuffer);
@@ -52,7 +48,7 @@ void Critter::Input(sf::Event _gameEvent)
 				//play sound
 				m_deathSound.play();
 				// Add to pending score
-				m_pendingScore += 1;
+				m_pendingScore += m_scoreValue;
 			}
 		}
 	}
@@ -67,5 +63,16 @@ int Critter::GetPendingScore()
 void Critter::ClearPendingScore()
 {
 	m_pendingScore = 0;
+}
+
+void Critter::Setup(std::string _textureFile, int _pointValue)
+{
+	// Setup Sprite
+	m_texture.loadFromFile(_textureFile);
+	m_sprite.setTexture(m_texture);
+	m_sprite.setPosition(rand() % sf::VideoMode::getDesktopMode().width
+		, rand() % sf::VideoMode::getDesktopMode().height);
+
+	m_scoreValue = _pointValue;
 }
 

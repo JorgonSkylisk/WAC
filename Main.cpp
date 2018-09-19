@@ -32,8 +32,13 @@ int main()
 	sf::Clock gameClock;
 
 	//create instance of Critter Class
-
-	Critter Gorilla;
+	const int NUM_CRITTERS = 5;
+	Critter critters[NUM_CRITTERS];
+	critters[0].Setup("graphics/gorilla.png", 10);
+	critters[1].Setup("graphics/hippo.png", 20);
+	critters[2].Setup("graphics/snake.png", 15);
+	critters[3].Setup("graphics/duck.png", 5);
+	critters[4].Setup("graphics/moose.png", 30);
 
 	// create font
 	sf::Font gameFont;
@@ -70,8 +75,10 @@ int main()
 		while (gamewindow.pollEvent(event))
 		{
 			//process input on critters
-			Gorilla.Input(event);
-
+			for (int i = 0; i < NUM_CRITTERS; ++i)
+			{
+				critters[i].Input(event);
+			}
 
 			if (event.type == sf::Event::Closed)
 				gamewindow.close();
@@ -84,8 +91,12 @@ int main()
 	// ************************
 		sf::Time frameTime = gameClock.restart();
 
-		Score += Gorilla.GetPendingScore();
-		Gorilla.ClearPendingScore();
+
+		for (int i = 0; i < NUM_CRITTERS; ++i)
+		{
+			Score += critters[i].GetPendingScore();
+			critters[i].ClearPendingScore();
+		}
 		ScoreText.setString("Score: " + std::to_string(Score));
 
 
@@ -100,7 +111,10 @@ int main()
 
 
 		// draw everything
-		Gorilla.Draw(gamewindow);
+		for (int i = 0; i < NUM_CRITTERS; ++i)
+		{
+			critters[i].Draw(gamewindow);
+		}
 		gamewindow.draw(ScoreText);
 
 
