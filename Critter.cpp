@@ -15,6 +15,7 @@ Critter::Critter()
 	, m_alive(true)
 	, m_deathSound()
 	, m_deathBuffer()
+	, m_pendingScore(0)
 {
 	// Setup Sprite
 	m_texture.loadFromFile("graphics/gorilla.png");
@@ -50,7 +51,21 @@ void Critter::Input(sf::Event _gameEvent)
 				m_alive = false;
 				//play sound
 				m_deathSound.play();
+				// Add to pending score
+				m_pendingScore += 1;
 			}
 		}
 	}
 }
+
+
+int Critter::GetPendingScore()
+{
+	return m_pendingScore;
+}
+
+void Critter::ClearPendingScore()
+{
+	m_pendingScore = 0;
+}
+

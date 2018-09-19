@@ -10,9 +10,9 @@
 
 class Critter
 {
-	//*************************
-	//******* BEHAVIOUR *******
-	//*************************
+	// *************************
+	// ******* BEHAVIOUR *******
+	// *************************
 
 public:
 
@@ -25,15 +25,18 @@ public:
 	// Process input on critter
 	void Input(sf::Event _gameEvent);
 
+	// Getter for pending score
+	int GetPendingScore();
 
-
+	// Clear pending score
+	void ClearPendingScore();
 
 
 	// *** END BEHAVIOUR ***
 
-	//********************
-	//******* DATA *******
-	//********************
+	// ********************
+	// ******* DATA *******
+	// ********************
 
 
 
@@ -47,6 +50,7 @@ private:
 	bool m_alive;
 	sf::Sound m_deathSound;
 	sf::SoundBuffer m_deathBuffer;
+	int m_pendingScore;
 
 
 }; // end critter class

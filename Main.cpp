@@ -12,9 +12,9 @@
 
 int main()
 {
-	//****************************
-	//******** GAME SETUP ********
-	//****************************
+	// ****************************
+	// ******** GAME SETUP ********
+	// ****************************
 	// Declare variable for display window
 	sf::RenderWindow gamewindow;
 	gamewindow.create(sf::VideoMode::getDesktopMode(), "Button Masher",
@@ -35,14 +35,29 @@ int main()
 
 	Critter Gorilla;
 
+	// create font
+	sf::Font gameFont;
+	gameFont.loadFromFile("fonts/mainFont.ttf");
+
+	//create score tracker
+	int Score = 0;
+	sf::Text ScoreText;
+	ScoreText.setFont(gameFont);
+	ScoreText.setString("Score: " + std::to_string(Score));
+	ScoreText.setCharacterSize(16);
+	ScoreText.setFillColor(sf::Color::White);
+	ScoreText.setPosition(300, 300);
+
+
+
 	// *****************
 	// *** END SETUP ***
 	// *****************
 
 
-	//*************************
-	//******* game loop *******
-	//*************************
+	// *************************
+	// ******* game loop *******
+	// *************************
 	while (gamewindow.isOpen())
 
 	{
@@ -64,10 +79,15 @@ int main()
 
 		// *** End INPUT ***
 
-	//************************
-	//******** UPDATE ********
-	//************************
+	// ************************
+	// ******** UPDATE ********
+	// ************************
 		sf::Time frameTime = gameClock.restart();
+
+		Score += Gorilla.GetPendingScore();
+		Gorilla.ClearPendingScore();
+		ScoreText.setString("Score: " + std::to_string(Score));
+
 
 	// *** END UPDATE ***
 		
@@ -75,8 +95,17 @@ int main()
 	// ****** DRAW *****
 	// *****************
 
+		// clear the screen
 		gamewindow.clear();
+
+
+		// draw everything
 		Gorilla.Draw(gamewindow);
+		gamewindow.draw(ScoreText);
+
+
+
+		// display to screen
 		gamewindow.display();
 
 	// *** END DRAW ***
