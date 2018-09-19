@@ -1,22 +1,74 @@
+// **** LIBRARIES ****
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <string>
+#include <cstdlib>
+#include <ctime>
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML WORKS!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	//****************************
+	//******** GAME SETUP ********
+	//****************************
+	// Declare variable for display window
+	sf::RenderWindow gamewindow;
+	gamewindow.create(sf::VideoMode::getDesktopMode(), "Button Masher",
+	sf::Style::Titlebar | sf::Style::Close);
+	
+	// TIMER
+	sf::Time timeLimit = sf::seconds(10.0f);
+	sf::Time timeRemaining = timeLimit;
+	sf::Clock gameClock;
 
-	while (window.isOpen())
+	// *****************
+	// *** END SETUP ***
+	// *****************
+
+
+	//*************************
+	//******* game loop *******
+	//*************************
+	while (gamewindow.isOpen())
+
 	{
+		// *****************
+		// ***** INPUT *****
+		// *****************
+
+
 		sf::Event event;
-		while (window.pollEvent(event))
+		while (gamewindow.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-		window.clear();
-		window.draw(shape);
-		window.display();
-	}
+				gamewindow.close();
+		} // End IF
+
+		// *** End INPUT ***
+
+	//************************
+	//******** UPDATE ********
+	//************************
+		sf::Time frameTime = gameClock.restart();
+
+	// *** END UPDATE ***
+		
+	// *****************
+	// ****** DRAW *****
+	// *****************
+
+		gamewindow.clear();
+
+		gamewindow.display();
+
+	// *** END DRAW ***
+
+	}// End WHILE
+	
+	 
+	 
+	// *****************
+	// * END GAME LOOP *
+	// *****************
+
 	return 0;
 }
