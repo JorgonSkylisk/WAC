@@ -54,6 +54,10 @@ int main()
 		sf::Event event;
 		while (gamewindow.pollEvent(event))
 		{
+			//process input on critters
+			Gorilla.Input(event);
+
+
 			if (event.type == sf::Event::Closed)
 				gamewindow.close();
 		} // End IF
