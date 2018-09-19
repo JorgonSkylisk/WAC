@@ -21,6 +21,8 @@ int main()
 	sf::Style::Titlebar | sf::Style::Close);
 	
 
+	// seed RNG
+	srand(time(NULL));
 
 
 
